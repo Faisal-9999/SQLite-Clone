@@ -7,12 +7,13 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "-Ilib", // Include the lib directory
+                "src/main.c", // Specify the main source file
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${workspaceFolder}/sqlite_clone.exe" // Output executable in the workspace folder
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}" // Set the current working directory to the workspace folder
             },
             "problemMatcher": [
                 "$gcc"

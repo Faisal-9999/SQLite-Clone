@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "lib/operations_enums.h"
-#include "lib/custom_data_structs.h"
+#include <string.h>
+#include "../lib/operations_enums.h"
+#include "../lib/custom_data_structs.h"
 
 //TODO: ADD PAGE AND TABLE WORKING
 //TODO: REREAD THE WHOLE DOCUMENTATION FROM START TO FINISH
@@ -60,6 +61,10 @@ void main() {
         switch (prepare_statement(input, &statement)) {
             case PREPARE_SUCCESS:
                 execute_statement(&statement);
+                continue;
+
+            case PREPARE_SYNTAX_ERROR:
+                printf("Incorrect syntax used after %.6s", input);
                 continue;
             
             case PREPARE_UNRECOGNISED_STATEMENT:
