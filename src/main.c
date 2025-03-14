@@ -5,8 +5,7 @@
 #include "../lib/operations_enums.h"
 #include "../lib/custom_data_structs.h"
 
-//TODO: ADD PAGE AND TABLE WORKING
-//TODO: REREAD THE WHOLE DOCUMENTATION FROM START TO FINISH
+//TODO: UNDERSTAND HOW A DATABASE WORKS BEFORE PROCEEDING ANY FURTHER AND READ THE DOCUMENTATION
 
 
 void print_prompt();
@@ -122,4 +121,16 @@ void execute_statement(Statement* statement) {
     default:
         break;
     }
+}
+
+void serialisze_row(Row* source, void* destination) {
+    memcpy(destination + ID_OFFSET, &(source->id), ID_SIZE);
+    memcpy(destination + USERNAME_OFFSET, source->username, USER_SIZE);
+    memcpy(destination + EMAIL_OFFSET, source->email, EMAIL_SIZE);
+}
+
+void deserialisze_row(Row* destination, void* source) {
+    memcpy(&(destination->id), source + ID_OFFSET, ID_SIZE);
+    memcpy(destination->username, source + USERNAME_OFFSET, USER_SIZE);
+    memcpy(destination->email, source + EMAIL_OFFSET, EMAIL_SIZE);
 }
