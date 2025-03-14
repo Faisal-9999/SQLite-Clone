@@ -15,15 +15,9 @@ MetaCommandState do_meta_command(char* user_command);
 
 void main() {
 
-    bool first = true;
+    printf("SQLite Clone version 0.0.1 2025\nEnter '.help' for usage hints.\nConnected to a transient in-memory database.");
 
     while (true) {
-
-        if(first) {
-            print_prompt();
-            first = false;
-        } 
-
         char input[1024];
         printf("\nSQLite Clone> ");
 
@@ -75,13 +69,14 @@ void main() {
     }
 }
 
-void print_prompt() {
-    printf("SQLite Clone version 0.0.1 2025\nEnter '.help' for usage hints.\nConnected to a transient in-memory database.");
-}
-
 MetaCommandState do_meta_command(char* user_command) {
+
+    //TODO: ADD MORE META COMMANDS
     if (strcmp(user_command, ".exit") == 0) {
         exit(EXIT_SUCCESS);
+    }
+    else if (strcmp(user_command, ".tables")) {
+        
     }
     else {
         return META_COMMAND_UNRECOGNISED;
@@ -90,14 +85,16 @@ MetaCommandState do_meta_command(char* user_command) {
 
 PrepareState prepare_statement(char* input, Statement* statement) {
 
+    //TODO: MAKE CHANGES HERE IN ACCORDANCE TO NEW 
+
     if (strncmp(input, "insert", 6) == 0) {
         statement->type = STATEMENT_INSERT;
 
-        int assigned_args = sscanf(input, "insert %d %s %s", &statement->row.id, statement->row.username, statement->row.email);
+        //int assigned_args = sscanf();
 
-        if (assigned_args < 3) {
-            return PREPARE_SYNTAX_ERROR;
-        }
+        // if (assigned_args < 3) {
+        //     return PREPARE_SYNTAX_ERROR;
+        // }
 
         return PREPARE_SUCCESS;
     }
@@ -111,6 +108,8 @@ PrepareState prepare_statement(char* input, Statement* statement) {
 }
 
 void execute_statement(Statement* statement) {
+
+    //TODO: ADD NEW CASES
     switch (statement->type) {
     case STATEMENT_INSERT:
         printf("Insertion Executed");
@@ -121,16 +120,4 @@ void execute_statement(Statement* statement) {
     default:
         break;
     }
-}
-
-void serialisze_row(Row* source, void* destination) {
-    memcpy(destination + ID_OFFSET, &(source->id), ID_SIZE);
-    memcpy(destination + USERNAME_OFFSET, source->username, USER_SIZE);
-    memcpy(destination + EMAIL_OFFSET, source->email, EMAIL_SIZE);
-}
-
-void deserialisze_row(Row* destination, void* source) {
-    memcpy(&(destination->id), source + ID_OFFSET, ID_SIZE);
-    memcpy(destination->username, source + USERNAME_OFFSET, USER_SIZE);
-    memcpy(destination->email, source + EMAIL_OFFSET, EMAIL_SIZE);
 }

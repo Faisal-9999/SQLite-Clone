@@ -4,38 +4,92 @@
 #ifndef CUSTOM_DS_H
 #define CUSTOM_DS_H
 
-#define sizeof_attribute(Struct, attribute) sizeof(((Struct*)0)->attribute)
+//EACH TABLE WILL BE A BINARY TREE CONSISTING OF NODES WHICH WILL BE THE ROWS
+//THE DATABASE WILL BE BINARY TREES EACH NODE BEING A TABLE
 
-#define PAGE_SIZE 4096
-#define ID_SIZE sizeof_attribute(Row, id)
-#define USER_SIZE sizeof_attribute(Row, username)
-#define EMAIL_SIZE sizeof_attribute(Row, email)
-#define ID_OFFSET 0
-#define USERNAME_OFFSET (ID_OFFSET + ID_SIZE)
-#define EMAIL_OFFSET (USERNAME_OFFSET + USER_SIZE)
-#define ROW_SIZE (ID_SIZE + USER_SIZE + EMAIL_SIZE)
-#define ROWS_PER_PAGE (PAGE_SIZE / ROW_SIZE)
+//TABLENODE CODE FROM HERE
 
-#define USERNAME_LENGTH 32
-#define EMAIL_LENGTH 255
-#define TABLE_MAX_PAGES 100
-
-#define TABLE_MAX_ROWS (ROWS_PER_PAGE * TABLE_MAX_PAGES)
-
-typedef struct {
-    uint32_t num_rows;
-    void* pages[TABLE_MAX_PAGES];
-} Table;
-
-typedef struct {
-    uint32_t id;
-    char username[USERNAME_LENGTH];
-    char email[EMAIL_LENGTH];
-} Row;
 
 typedef struct {
     StatementType type;
-    Row row;
 } Statement;
+
+
+typedef struct {
+    int ID;
+    char username[100];
+    char email[100];
+} TableNode;
+
+
+//TABLE CODE FROM HERE
+
+typedef struct {
+    char table_name[100];
+    TableNode* left_node;
+    TableNode* right_node;
+    int current_ID;
+    size_t table_rows;
+} Table;
+
+
+Table* init_Table() {
+    Table* table = (Table*) malloc (sizeof(Table));
+    table->left_node = NULL;
+    table->right_node = NULL;
+    table->table_rows = 0;
+    table->current_ID = 0;
+    return table;
+}
+
+Table* load_Table(FILE* file) {
+    
+}
+
+//ADD VARIANTS FOR EACH FUNCTION DEPENDING THE ARGUEMNTS GIVEN BY THE USER FOR EXAMPLE IF THE USER ENTERS
+//THAT HE WANTS TO DELETE THE ROW IN WHICH THIS IS THE ID or that DELETE THE ROW IN Which this username is contained
+//FOR THIS WILL NEED TWO DIFFERENT FUNCTIONS
+
+void add_row(Table* table, TableNode* new_row) {
+
+}
+
+void update_row(Table* table, size_t ID) {
+
+}
+
+void delete_row() {
+
+}
+
+void delete_in_row() {
+
+//EACH TABLE WILL BE A BINARY TREE CONSISTING OF NODES WHICH WILL BE THE ROWS
+//THE DATABASE WILL BE BINARY
+}
+
+//DATABASE CODE FROM HERE
+
+typedef struct {
+    Table* tables;
+} Database;
+
+void delete_table() {
+
+}
+
+void add_table() {
+
+}
+
+Database* init_database() {
+
+}
+
+Database* load_database() {
+
+}
+
+
 
 #endif
