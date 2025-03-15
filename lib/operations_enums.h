@@ -1,6 +1,7 @@
-#ifndef OP_ENUMS_H
-#define OP_ENUMS_H
+#ifndef ENUMS_H
+#define ENUMS_H
 
+#include <stdio.h>
 
 typedef enum {
     META_COMMAND_SUCCESS,
@@ -13,6 +14,15 @@ typedef enum {
     PREPARE_SYNTAX_ERROR,
     PREPARE_UNRECOGNISED_STATEMENT,
 } PrepareState;
+
+typedef enum {
+    TableNotFound,
+    TableFound,
+    DatabaseNotFound,
+    DatabaseFound,
+    RowNotFound,
+    RowFound,
+} SearchState;
 
 typedef enum {
     STATEMENT_INSERT,

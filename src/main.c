@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "../lib/operations_enums.h"
-#include "../lib/custom_data_structs.h"
+#include "../lib/misc_structs.h"
 
 //TODO: UNDERSTAND HOW A DATABASE WORKS BEFORE PROCEEDING ANY FURTHER AND READ THE DOCUMENTATION
 
