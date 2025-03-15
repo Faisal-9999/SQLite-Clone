@@ -7,32 +7,44 @@
 
 //TODO: FOCUS ON TABLE WORKING FOR NOW
 
-typedef struct {
+typedef struct TableNode {
+    TableNode* left;
+    TableNode* right;
     int ID;
     char username[100];
     char email[100];
 } TableNode;
 
+TableNode* init_table_node(int* id, char* username, char* email) {
+    
+}
+
 typedef struct {
     char table_name[100];
-    TableNode* left_node;
-    TableNode* right_node;
     int current_ID;
+    TableNode* root;
     size_t table_rows;
 } Table;
 
 
 Table* init_Table() {
     Table* table = (Table*) malloc (sizeof(Table));
-    table->left_node = NULL;
-    table->right_node = NULL;
+    table->root = NULL;
     table->table_rows = 0;
     table->current_ID = 0;
     return table;
 }
 
 SearchState search_with_ID(Table* table, TableNode* row, size_t ID) {
+    if (table->root == NULL) {
+        return RowNotFound;
+    }
 
+    TableNode* current = table->root;
+
+
+
+    
 }
 
 SearchState search_with_username(Table* table, TableNode* row, char* username) {

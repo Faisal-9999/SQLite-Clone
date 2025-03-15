@@ -5,9 +5,6 @@
 #include "../lib/operations_enums.h"
 #include "../lib/misc_structs.h"
 
-//TODO: UNDERSTAND HOW A DATABASE WORKS BEFORE PROCEEDING ANY FURTHER AND READ THE DOCUMENTATION
-
-
 void print_prompt();
 void execute_statement(Statement* statement);
 PrepareState prepare_statement(char* input, Statement* statement);

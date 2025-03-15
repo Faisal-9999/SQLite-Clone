@@ -24,7 +24,7 @@ Database* pop_state(DatabaseStack* stack) {
 
 }
 
-DatabaseStack* init_databaseS_stack() {
+DatabaseStack* init_database_stack() {
 
 }
 
