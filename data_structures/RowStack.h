@@ -4,8 +4,8 @@
 #include "../lib/table.h"
 #include <stdlib.h>
 
-//TODO: COMPLETE WORK ON STACK FOR PREORDER TRAVERSAL THIS WILL BE USED FOR SEARCHING
-//TODO: CONTINUE WORKING ON THE STACK UNTIL ITS FEATURE COMPLETE
+//TODO: FIX THE ISSUE WHERE the Table.h file cant see the Stack struct in this but it can see the stacknode
+//TODO: MIGHT BE DUE TO THE CIRCULAR DEPENDENCY SINCE THIS FILE IS INCLUDED THERE AND THAT FILE IS INCLUDED HERE
 
 typedef struct StackNode {
     StackNode* next;
@@ -24,9 +24,19 @@ StackNode* init_stacknode(TableNode* row) {
 typedef struct {
     StackNode* head;
     StackNode* tail;
+    int size;
 } Stack;
 
+Stack* init_stack() {
+    Stack* stack = (Stack*) malloc (sizeof(Stack));
+    stack->head = NULL;
+    stack->tail = NULL;
+    stack->size = 0;
+    return stack;
+}
+
 void push(Stack* stack, TableNode* row) {
+    stack->size++;
     if (stack->head == NULL) {
         stack->head = init_stacknode(row);
         stack->tail = stack->head;
@@ -42,6 +52,8 @@ TableNode* pop(Stack* stack) {
     if (stack->head == NULL) {
         return NULL;
     }
+
+    stack->size--;
 
     TableNode* temp = stack->tail->row;
     StackNode* toFree = stack->tail;

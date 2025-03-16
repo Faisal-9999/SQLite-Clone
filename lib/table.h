@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <../data_structures/RowStack.h>
 #include "operations_enums.h"
 
 //TODO: FOCUS ON TABLE WORKING FOR NOW
@@ -10,13 +12,17 @@
 typedef struct TableNode {
     TableNode* left;
     TableNode* right;
-    int ID;
+    int* ID;
     char username[100];
     char email[100];
 } TableNode;
 
 TableNode* init_table_node(int* id, char* username, char* email) {
-    
+    TableNode* row = (TableNode*) malloc (sizeof(TableNode));
+    row->ID = id;
+    strcpy(row->username, username);
+    strcpy(row->email, email);
+    return row;
 }
 
 typedef struct {
@@ -42,6 +48,7 @@ SearchState search_with_ID(Table* table, TableNode* row, size_t ID) {
 
     TableNode* current = table->root;
 
+    
 
 
     
